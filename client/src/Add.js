@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Axios from 'axios';
 
-function App() {
+function Add() {
     /*
             * email id
              First Name
@@ -34,19 +34,9 @@ function App() {
             })
     }
 
-    const getEmployees = () => {
-        Axios.get("http://localhost:8080/get")
-            .then((response) => {
-                setEmployeeList(response.data);
-            })
-            .catch((err) => {
-                console.log("Error in fetching data...", err);
-            });
-    };
 
     return (
         <div className="addUser">
-
             <div className="information">
 
                 <label>First Name:</label>
@@ -83,25 +73,10 @@ function App() {
 
                 <button onClick={addNewEmployee}>Add Employee</button>
             </div>
-            <button onClick={getEmployees}>Fetch Employees</button>
-            <div className="showDetails">
-                {employeeList.map((val) => {
-                    return (
-                        <div>
-                            <h2>ID: {val.id}</h2>
-                            <h3>FirstName: {val.firstName}</h3>
-                            <h3>LastName: {val.lastName}</h3>
-                            <h3>Email: {val.email}</h3>
-                            <h3>Phone Number: {val.number}</h3>
-                        </div>
-                    );
-                })}
-            </div>
-
         </div>
     )
 
 }
 
 
-export default App;
+export default Add;

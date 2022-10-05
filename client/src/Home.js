@@ -1,4 +1,9 @@
-export default function Home(){
+import Axios from 'axios';
+import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
+export default function Home() {
+
     /*
             * email id
              First Name
@@ -6,30 +11,8 @@ export default function Home(){
              Email
              Phone number
         */
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [number, setNumber] = useState(0);
 
     const [employeeList, setEmployeeList] = useState([]);
-
-    const addNewEmployee = () => {
-        Axios.post("http://localhost:8080/add",
-            {
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
-                number: number,
-
-            }).then(() => {
-                setEmployeeList([...employeeList, {
-                    firstName: firstName,
-                    lastName: lastName,
-                    email: email,
-                    number: number,
-                }])
-            })
-    }
 
     const getEmployees = () => {
         Axios.get("http://localhost:8080/get")
@@ -41,60 +24,47 @@ export default function Home(){
             });
     };
 
+    const delEmployee = (id) => {
+        Axios.delete(`http://localhost:8080/delete/${id}`)
+            .then((response) => {
+                setEmployeeList(employeeList.filter((val) => {
+                    return val.id != id;
+                }))
+            })
+            .catch((err) => {
+                console.log("Error in deleteing data...", err);
+            });
+    }
+
+
+    useEffect(getEmployees, []);
     return (
-        <div className="addUser">
+        <div className="Home">
 
-            <div className="information">
-
-                <label>First Name:</label>
-                <input
-                    type="text"
-                    onChange={(event) => {
-                        setFirstName(event.target.value);
-                    }}
-                />
-
-                <label>Last Name:</label>
-                <input
-                    type="text"
-                    onChange={(event) => {
-                        setLastName(event.target.value);
-                    }}
-                />
-
-                <label>Email:</label>
-                <input
-                    type="text"
-                    onChange={(event) => {
-                        setEmail(event.target.value);
-                    }}
-                />
-
-                <label>Phone number:</label>
-                <input
-                    type="number"
-                    onChange={(event) => {
-                        setNumber(event.target.value);
-                    }}
-                />
-
-                <button onClick={addNewEmployee}>Add Employee</button>
-            </div>
-            <button onClick={getEmployees}>Fetch Employees</button>
-            <div className="showDetails">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone number</th>
+                    <th></th>
+                    <th></th>
+                </tr>
                 {employeeList.map((val) => {
                     return (
-                        <div>
-                            <h2>ID: {val.id}</h2>
-                            <h3>FirstName: {val.firstName}</h3>
-                            <h3>LastName: {val.lastName}</h3>
-                            <h3>Email: {val.email}</h3>
-                            <h3>Phone Number: {val.number}</h3>
-                        </div>
+                        <tr>
+                            <td>{val.id}</td>
+                            <td>{val.firstname}</td>
+                            <td>{val.lastname}</td>
+                            <td>{val.email}</td>
+                            <td>{val.number}</td>
+                            <td><button onClick={() => <Link to="./Update"/>}>Edit</button></td>
+                            <td><button onClick={() => { delEmployee(val.id) }}>Delete</button></td>
+                        </tr>
                     );
                 })}
-            </div>
-
+            </table>
         </div>
     )
 
