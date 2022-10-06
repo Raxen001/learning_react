@@ -42,28 +42,32 @@ export default function Home() {
         <div className="Home">
 
             <table>
-                <tr>
-                    <th>ID</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Phone number</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                {employeeList.map((val) => {
-                    return (
-                        <tr>
-                            <td>{val.id}</td>
-                            <td>{val.firstname}</td>
-                            <td>{val.lastname}</td>
-                            <td>{val.email}</td>
-                            <td>{val.number}</td>
-                            <td><button onClick={() => <Link to="./Update"/>}>Edit</button></td>
-                            <td><button onClick={() => { delEmployee(val.id) }}>Delete</button></td>
-                        </tr>
-                    );
-                })}
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone number</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {employeeList.map((val) => {
+                        return (
+                            <tr>
+                                <td>{val.id}</td>
+                                <td>{val.firstname}</td>
+                                <td>{val.lastname}</td>
+                                <td>{val.email}</td>
+                                <td>{val.number}</td>
+                                <td><Link to={`./update/${val.id}`} className='btn btn-success'>Edit</Link></td>
+                                <td><button onClick={() => { delEmployee(val.id) }}>Delete</button></td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
             </table>
         </div>
     )

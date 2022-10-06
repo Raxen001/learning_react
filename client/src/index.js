@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './index.css';
 import Add from './Add';
 import Home from './Home';
+import Update from './Update';
 //import { BrowserRouter as Router, Routes } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -19,6 +20,7 @@ root.render(
             <Routes>
                 <Route exact path="/" element={<Home />} />
                 <Route exact path="/add" element={<Add />} />
+                <Route exact path="/update/:id" element={<Update />}/>
                 <Route path="*" element={<Home />} />
             </Routes>
         </Router>

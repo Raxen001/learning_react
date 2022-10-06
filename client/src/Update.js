@@ -1,9 +1,16 @@
 import Axios from 'axios';
 import { useState, useEffect } from 'react';
 
+import { useParams } from 'react-router-dom';
+
+
+
 
 
 export default function Update() {
+
+    const { id } = useParams();
+    console.log(id);
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -13,7 +20,7 @@ export default function Update() {
     const [employeeList, setEmployeeList] = useState([]);
 
 
-    const updateEmployee = (id) => {
+    const updateEmployee = () => {
         Axios.put('http://localhost:8080/update', {
             id: id,
             firstName: firstName,
@@ -23,7 +30,7 @@ export default function Update() {
         }).then((response) => {
             setEmployeeList(
                 employeeList.map(
-                    (val) => {
+                    (val, key) => {
                         return val.id == id ?
                             {
                                 id: id,

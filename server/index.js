@@ -70,9 +70,9 @@ app.put("/update", (req, res) => {
     const email = req.body.email;
     const number = req.body.number;
 
-    connection.query("UPDATE employees SET (?,?,?,?) WHERE id = ?", [firstname, lastname, email, number, id],
-        (err) => {
-            if (err, result) {
+    connection.query("UPDATE employees SET firstname=?, lastname=?, email=?, number=? WHERE id = ?", [firstname, lastname, email, number, id],
+        (err, result) => {
+            if (err) {
                 console.log(err);
             }
             else {
