@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import { useState, useEffect } from 'react';
 
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 
 
@@ -10,14 +10,13 @@ import { useParams } from 'react-router-dom';
 export default function Update() {
 
     const { id } = useParams();
-    console.log(id);
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [number, setNumber] = useState(0);
 
-    const [employeeList, setEmployeeList] = useState([]);
+    const [employee, setEmployee] = useState([]);
 
 
     const updateEmployee = () => {
@@ -28,23 +27,20 @@ export default function Update() {
             email: email,
             number: number
         }).then((response) => {
-            setEmployeeList(
-                employeeList.map(
-                    (val, key) => {
-                        return val.id == id ?
-                            {
-                                id: id,
-                                firstName: firstName,
-                                lastName: lastName,
-                                email: email,
-                                number: number
-                            } : val;
-                    }
-                )
-            );
+            console.log(response);
         });
     }
 
+    const getEmployee = () => {
+        Axios.get(`http://localhost:8080/get/${id}`).then(
+            (response) => {
+                setEmployee(response.data[0]);
+            }
+        )
+
+    };
+
+    useEffect(()=>getEmployee(), []);
 
     return (
         <div className="update">
@@ -53,6 +49,7 @@ export default function Update() {
                 <label>First Name:</label>
                 <input
                     type="text"
+                    defaultValue={employee.firstname}
                     onChange={(event) => {
                         setFirstName(event.target.value);
                     }}
@@ -61,6 +58,7 @@ export default function Update() {
                 <label>Last Name:</label>
                 <input
                     type="text"
+                    defaultValue={employee.lastname}
                     onChange={(event) => {
                         setLastName(event.target.value);
                     }}
@@ -69,6 +67,7 @@ export default function Update() {
                 <label>Email:</label>
                 <input
                     type="text"
+                    defaultValue={employee.email}
                     onChange={(event) => {
                         setEmail(event.target.value);
                     }}
@@ -77,12 +76,13 @@ export default function Update() {
                 <label>Phone number:</label>
                 <input
                     type="number"
+                   defaultValue={employee.number}
                     onChange={(event) => {
                         setNumber(event.target.value);
                     }}
                 />
 
-                <button onClick={updateEmployee}>Update</button>
+                <Link to="/Home" onClick={updateEmployee} className="btn btn-primary">Update</Link>
             </div>
         </div>
     )

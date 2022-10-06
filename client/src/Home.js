@@ -54,9 +54,9 @@ export default function Home() {
                     </tr>
                 </thead>
                 <tbody>
-                    {employeeList.map((val) => {
+                    {employeeList.map((val, key) => {
                         return (
-                            <tr>
+                            <tr key={key.toString()}>
                                 <td>{val.id}</td>
                                 <td>{val.firstname}</td>
                                 <td>{val.lastname}</td>

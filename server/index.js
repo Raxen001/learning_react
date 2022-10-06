@@ -28,6 +28,19 @@ app.get('/get', (req, res) => {
     })
 });
 
+app.get('/get/:id', (req, res) => {
+    const id = req.params.id;
+    connection.query("SELECT * FROM employees WHERE id = ?", id,
+    (err, result) =>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.send(result);
+        }
+    })
+})
+
 app.post('/add', (req, res) => {
 
     const firstname = req.body.firstName;
