@@ -1,3 +1,24 @@
+:root {
+  --color-black: #1d2021;
+  --color-gray: #282828;
+  --color-red: #cc241d;
+  --color-lightred: #fb4934;
+  --color-green: #98971a;
+  --color-lightgreen: #b8bb26;
+  --color-yellow: #d79921;
+  --color-lightyellow: #fabd2f;
+  --color-blue: #458588;
+  --color-lightblue: #83a598;
+  --color-mangeta: #b16286;
+  --color-lightmagenta: #d3869b;
+  --color-cyan: #689d6a;
+  --color-lightcyan: #8ec07c;
+  --color-white: #928374;
+  --color-lightwhite: #d5c4a1;
+  --color-orange: #d65d0e;
+  --color-lightorange: #fe8019;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -34,4 +55,13 @@ nav a {
   display: block;
   padding: 8px;
   background-color: var(--color-gray);
+  color: var(--color-blue);
 }
+
+
+table{
+    table-layout: auto;
+    width: 75%;
+}
+
+

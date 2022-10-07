@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
+import {Link} from "react-router-dom";
 import Axios from 'axios';
+
+import './index.css';
 
 function Add() {
     /*
@@ -71,7 +74,7 @@ function Add() {
                     }}
                 />
 
-                <button onClick={addNewEmployee}>Add Employee</button>
+                <Link to={"/Home"} onClick={addNewEmployee}>Add</Link>
             </div>
         </div>
     )

@@ -1,6 +1,8 @@
 import Axios from 'axios';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import './index.css';
 
 export default function Home() {
 
@@ -62,8 +64,8 @@ export default function Home() {
                                 <td>{val.lastname}</td>
                                 <td>{val.email}</td>
                                 <td>{val.number}</td>
-                                <td><Link to={`./update/${val.id}`} className='btn btn-success'>Edit</Link></td>
-                                <td><button onClick={() => { delEmployee(val.id) }}>Delete</button></td>
+                                <td><Link to={`./update/${val.id}`} className='btn btn-success'>Edit </Link>
+                                <button onClick={() => { delEmployee(val.id) }}>Delete</button></td>
                             </tr>
                         );
                     })}

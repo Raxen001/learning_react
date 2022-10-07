@@ -2,6 +2,7 @@ import Axios from 'axios';
 import { useState, useEffect } from 'react';
 
 import { useParams, Link } from 'react-router-dom';
+import './index.css';
 
 
 
@@ -35,12 +36,16 @@ export default function Update() {
         Axios.get(`http://localhost:8080/get/${id}`).then(
             (response) => {
                 setEmployee(response.data[0]);
+                setFirstName(response.data[0].firstname);
+                setLastName(response.data[0].lastname);
+                setEmail(response.data[0].email);
+                setNumber(response.data[0].number);
             }
         )
 
     };
 
-    useEffect(()=>getEmployee(), []);
+    useEffect(() => getEmployee(), []);
 
     return (
         <div className="update">
@@ -49,7 +54,7 @@ export default function Update() {
                 <label>First Name:</label>
                 <input
                     type="text"
-                    defaultValue={employee.firstname}
+                    value={firstName}
                     onChange={(event) => {
                         setFirstName(event.target.value);
                     }}
@@ -58,7 +63,7 @@ export default function Update() {
                 <label>Last Name:</label>
                 <input
                     type="text"
-                    defaultValue={employee.lastname}
+                    value={lastName}
                     onChange={(event) => {
                         setLastName(event.target.value);
                     }}
@@ -67,7 +72,7 @@ export default function Update() {
                 <label>Email:</label>
                 <input
                     type="text"
-                    defaultValue={employee.email}
+                    value={email}
                     onChange={(event) => {
                         setEmail(event.target.value);
                     }}
@@ -76,7 +81,7 @@ export default function Update() {
                 <label>Phone number:</label>
                 <input
                     type="number"
-                   defaultValue={employee.number}
+                    value={number}
                     onChange={(event) => {
                         setNumber(event.target.value);
                     }}
